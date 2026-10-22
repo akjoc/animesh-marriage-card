@@ -1,0 +1,810 @@
+/* Progressive enhancement: without JavaScript the mandap is open and content visible. */
+.mandap-story {
+  position: relative;
+  background: #4e1524;
+  --gate-angle: 0deg;
+  --gate-shift: 0%;
+  --gate-opacity: 1;
+  --welcome-opacity: 1;
+  --room-scale: 1.12;
+  --names-opacity: 0;
+  --names-y: 40px;
+  --foliage-x: 0px;
+  --foliage-y: 0px;
+}
+.mandap-stage {
+  position: relative;
+  height: 100svh;
+  min-height: 570px;
+  isolation: isolate;
+  overflow: hidden;
+  background: #e7cf9e;
+}
+.mandap-interior {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.mandap-scenery {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.mandap-light {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 48%,
+    #fff6dfad 0%,
+    #fff4df70 26%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+.mandap-names {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 75px 20px 40px;
+  color: var(--wine-dark);
+  text-shadow: 0 1px 18px #fff4d9;
+}
+.mandap-blessing {
+  font-family: NotoDevanagari, serif;
+  font-size: 17px;
+  margin-bottom: 17px;
+}
+.mandap-names > .eyebrow {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: #6e4827;
+  margin-bottom: 23px;
+}
+.mandap-names h2 {
+  font-size: clamp(68px, 7.7vw, 112px);
+  line-height: 0.88;
+  letter-spacing: -3px;
+}
+.mandap-names h2 span {
+  display: block;
+  font-size: 0.47em;
+  font-style: italic;
+  line-height: 1.3;
+  margin: 8px 0;
+  color: #926236;
+}
+.mandap-rule {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #885b2e;
+  margin: 25px 0 15px;
+  font-size: 25px;
+  line-height: 1;
+}
+.mandap-rule > span {
+  width: 50px;
+  height: 1px;
+  background: #a17946;
+}
+.mandap-date {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2.1px;
+}
+.mandap-date span {
+  margin: 0 9px;
+}
+.mandap-promise {
+  font: italic 24px var(--serif);
+  margin-top: 14px;
+}
+.mandap-enter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  background: #fff5dfde;
+  border: 1px solid #aa855b;
+  padding: 11px 18px;
+  margin-top: 25px;
+  min-height: 44px;
+  text-shadow: none;
+}
+.mandap-enter span {
+  font-size: 20px;
+  line-height: 1;
+}
+.mandap-enter:hover {
+  background: #fff6e6;
+}
+.mandap-doors,
+.gate-welcome,
+.gate-scroll {
+  display: none;
+}
+.mandap-skip {
+  position: absolute;
+  right: 32px;
+  top: 26px;
+  z-index: 10;
+  color: #f2dfbc;
+  background: #481626d9;
+  border: 1px solid #c6a56b66;
+  padding: 9px 17px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 10px;
+  letter-spacing: 0.6px;
+}
+.mandap-skip:hover {
+  background: #35101d;
+}
+.mandap-scene-count {
+  position: absolute;
+  left: 38px;
+  bottom: 30px;
+  display: flex;
+  gap: 13px;
+  align-items: center;
+  color: #fff0cf;
+  background: #4e1524c9;
+  padding: 7px 12px;
+  font-size: 8px;
+  letter-spacing: 1.8px;
+}
+.mandap-scene-count i {
+  width: 40px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+.mandap-foreground {
+  position: absolute;
+  bottom: -70px;
+  width: 210px;
+  color: #697450;
+  pointer-events: none;
+}
+.mandap-foreground svg {
+  width: 100%;
+  height: auto;
+}
+.foreground-left {
+  left: -20px;
+  transform: rotate(-12deg);
+}
+.foreground-right {
+  right: -20px;
+  transform: scaleX(-1) rotate(-12deg);
+}
+.mandap-petals {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.mandap-petal {
+  position: absolute;
+  left: var(--left);
+  top: -30px;
+  width: var(--size);
+  height: calc(var(--size) * 0.65);
+  border-radius: 90% 0 90% 15%;
+  background: #9d4150;
+  opacity: 0;
+  box-shadow: inset 1px 1px 2px #ffd6a94d;
+}
+.mandap-petal:nth-child(3n) {
+  background: #bc862d;
+}
+.mandap-petal:nth-child(4n) {
+  background: #e9b3a0;
+}
+
+/* Scroll is native; the extra height is the runway for the sticky stage. */
+.cinematic .mandap-story {
+  height: 260svh;
+  min-height: 1500px;
+}
+.cinematic .mandap-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+}
+.cinematic .mandap-scenery {
+  transform: scale(var(--room-scale));
+  will-change: transform;
+}
+.cinematic .mandap-names {
+  opacity: var(--names-opacity);
+  transform: translateY(var(--names-y));
+  will-change: transform, opacity;
+}
+.cinematic .mandap-doors {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  perspective: 1800px;
+  pointer-events: none;
+  opacity: var(--gate-opacity);
+}
+.mandap-door {
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  width: calc(50% + 1px);
+  background: #4a1627 url("assets/mandap-door.svg") center / 100% 100% no-repeat;
+  backface-visibility: hidden;
+  will-change: transform;
+  box-shadow: 0 0 50px #2c0b1d80;
+}
+.door-left {
+  left: 0;
+  transform-origin: left center;
+  transform: translateX(calc(-1 * var(--gate-shift)))
+    rotateY(calc(-1 * var(--gate-angle)));
+}
+.door-right {
+  right: 0;
+  transform-origin: right center;
+  transform: translateX(var(--gate-shift)) rotateY(var(--gate-angle));
+}
+.door-right::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  transform: scaleX(-1);
+}
+.cinematic .gate-welcome {
+  display: flex;
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #f0dbb2;
+  pointer-events: none;
+  opacity: var(--welcome-opacity);
+  transform: translateY(calc(-1 * var(--welcome-y, 0px)));
+  padding-bottom: 40px;
+  text-shadow: 0 2px 20px #270b18;
+}
+.gate-overline {
+  font-size: 9px;
+  letter-spacing: 3px;
+  margin-bottom: 28px;
+}
+.gate-seal {
+  width: 108px;
+  height: 108px;
+  border: 1px solid #e0ba78;
+  outline: 1px solid #a57c48;
+  outline-offset: 7px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 25%, #804153, #421525);
+  box-shadow:
+    0 10px 60px #230a18,
+    inset 0 0 30px #c58c4d26;
+  font: 43px/108px var(--serif);
+  letter-spacing: -3px;
+  transform: rotate(-6deg);
+}
+.gate-seal span {
+  font-style: italic;
+  font-size: 28px;
+  margin: 0 3px;
+  color: #d9b071;
+}
+.gate-title {
+  font: 52px/1.05 var(--serif);
+  margin: 32px 0 22px;
+  letter-spacing: -0.5px;
+  padding: 10px 20px;
+  background: radial-gradient(ellipse, #4f1929 30%, #4f192900 72%);
+}
+.gate-title em {
+  color: #d6b582;
+}
+.gate-date {
+  font-size: 9px;
+  letter-spacing: 2.4px;
+}
+.cinematic .gate-scroll {
+  display: flex;
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: #f0d8b2;
+  text-align: center;
+  white-space: nowrap;
+  opacity: var(--welcome-opacity);
+  pointer-events: none;
+}
+.gate-scroll > span:not(.scroll-track) {
+  font-size: 8px;
+  letter-spacing: 2.2px;
+}
+.gate-scroll small {
+  font: italic 18px var(--serif);
+  opacity: 0.8;
+}
+.scroll-track {
+  display: block;
+  width: 1px;
+  height: 42px;
+  background: #cfa1674d;
+  position: relative;
+  overflow: hidden;
+}
+.scroll-track i {
+  position: absolute;
+  inset: -50% 0 auto;
+  height: 50%;
+  background: #f4d49c;
+  animation: scroll-trail 2s ease-in-out infinite;
+}
+.cinematic .foreground-left {
+  transform: translate(calc(-1 * var(--foliage-x)), var(--foliage-y))
+    rotate(-12deg);
+}
+.cinematic .foreground-right {
+  transform: translate(var(--foliage-x), var(--foliage-y)) scaleX(-1)
+    rotate(-12deg);
+}
+.cinematic .mandap-petal {
+  animation: mandap-petal-fall var(--duration) linear var(--delay) infinite;
+}
+.cinematic .mandap-stage:not(.scene-active) .mandap-petal {
+  animation-play-state: paused;
+}
+
+/* The rest of the invitation unfolds in deliberately staggered chapters. */
+.cinematic .story-reveal {
+  opacity: 0;
+  transform: translate3d(0, 46px, 0);
+  transition:
+    opacity 950ms ease var(--reveal-delay, 0ms),
+    transform 1100ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
+}
+.cinematic .story-reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+.cinematic .event-card.story-reveal {
+  transform: translate3d(0, 65px, 0) rotate(2deg);
+  transform-origin: center bottom;
+}
+.cinematic .event-card.story-reveal.is-visible {
+  transform: translate3d(0, 0, 0) rotate(0);
+}
+.cinematic .venue-card.story-reveal {
+  transform: translate3d(0, 45px, 0) scale(0.96);
+}
+.cinematic .venue-card.story-reveal.is-visible {
+  transform: translate3d(0, 0, 0) scale(1);
+}
+.cinematic .family-signoff.story-reveal {
+  transform: translateY(20px) scale(0.93);
+}
+.cinematic .family-signoff.story-reveal.is-visible {
+  transform: translateY(0) scale(1);
+}
+.cinematic .hero-art {
+  transform: translateY(var(--parallax-y, 0px));
+}
+.cinematic .hero-art .art-caption {
+  transform: translateY(calc(var(--parallax-y, 0px) * -0.35)) rotate(-5deg);
+}
+.cinematic .corner-flower.left {
+  transform: translateY(var(--parallax-y, 0px)) rotate(40deg);
+}
+.cinematic .corner-flower.right {
+  transform: translateY(calc(-1 * var(--parallax-y, 0px))) rotate(-40deg);
+}
+.cinematic .venue-visual > svg {
+  transform: translateY(var(--parallax-y, 0px)) scale(1.04);
+}
+.cinematic .section-heading .lotus {
+  animation: lotus-breathe 6s ease-in-out infinite;
+}
+.cinematic .date-ribbon {
+  position: relative;
+  overflow: hidden;
+}
+.cinematic .date-ribbon::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    #ffdeb21a 50%,
+    transparent 65%
+  );
+  transform: translateX(-100%);
+}
+.cinematic .date-ribbon.is-visible::after {
+  animation: ribbon-light 2.5s ease 0.2s both;
+}
+.reading-progress {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 90;
+  pointer-events: none;
+}
+.cinematic .reading-progress {
+  display: block;
+}
+.reading-progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #c8a46c;
+  transform: scaleX(var(--reading-progress, 0));
+  transform-origin: left;
+}
+.motion-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 26px;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  border: 1px solid #d6c3a5;
+  border-radius: 30px;
+  background: #fbf7eef5;
+  color: var(--wine);
+  padding: 10px 14px;
+  box-shadow: 0 3px 20px #30110e0d;
+  font-size: 10px;
+}
+.motion-indicator {
+  width: 9px;
+  height: 9px;
+  border: 1px solid var(--wine);
+  border-radius: 50%;
+}
+.motion-toggle[aria-pressed="true"] .motion-indicator {
+  background: var(--wine);
+  box-shadow: 0 0 0 3px #641d2e12;
+}
+.motion-disabled *,
+.motion-disabled *::before,
+.motion-disabled *::after {
+  animation: none !important;
+  transition: none !important;
+}
+.motion-disabled {
+  scroll-behavior: auto;
+}
+.motion-disabled .floating-petals,
+.motion-disabled .mandap-petals {
+  display: none;
+}
+.motion-disabled .story-reveal {
+  opacity: 1;
+  transform: none;
+}
+@keyframes scroll-trail {
+  to {
+    transform: translateY(120px);
+  }
+}
+@keyframes mandap-petal-fall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -3vh, 0) rotate(0);
+  }
+  12% {
+    opacity: 0.75;
+  }
+  85% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--drift), 110svh, 0) rotate(420deg);
+  }
+}
+@keyframes lotus-breathe {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(4deg);
+  }
+}
+@keyframes ribbon-light {
+  to {
+    transform: translateX(100%);
+  }
+}
+@media (min-width: 1700px) {
+  .mandap-scenery {
+    object-position: center 55%;
+  }
+}
+@media (max-width: 760px) {
+  .mandap-stage {
+    min-height: 570px;
+  }
+  .cinematic .mandap-story {
+    height: 240svh;
+    min-height: 1380px;
+  }
+  .mandap-names {
+    padding: 40px 18px 20px;
+  }
+  .mandap-names h2 {
+    font-size: clamp(59px, 15vw, 82px);
+    letter-spacing: -1.5px;
+  }
+  .mandap-blessing {
+    font-size: 15px;
+    margin-bottom: 18px;
+  }
+  .mandap-names > .eyebrow {
+    font-size: 7px;
+    letter-spacing: 1.7px;
+    margin-bottom: 24px;
+  }
+  .mandap-rule {
+    margin: 24px 0 17px;
+  }
+  .mandap-date {
+    font-size: 8px;
+    letter-spacing: 1.2px;
+  }
+  .mandap-date span {
+    margin: 0 4px;
+  }
+  .mandap-promise {
+    font-size: 19px;
+    margin-top: 14px;
+  }
+  .mandap-enter {
+    margin-top: 27px;
+    font-size: 9px;
+    padding: 10px 15px;
+  }
+  .mandap-skip {
+    top: 20px;
+    right: 18px;
+    font-size: 9px;
+    padding: 7px 13px;
+    gap: 12px;
+  }
+  .mandap-scene-count {
+    left: 18px;
+    bottom: 76px;
+    font-size: 6px;
+    letter-spacing: 1.2px;
+    padding: 5px 8px;
+    gap: 8px;
+  }
+  .mandap-scene-count i {
+    width: 20px;
+  }
+  .gate-overline {
+    font-size: 7px;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+  }
+  .gate-seal {
+    width: 90px;
+    height: 90px;
+    font-size: 36px;
+    line-height: 90px;
+  }
+  .gate-seal span {
+    font-size: 24px;
+  }
+  .gate-title {
+    font-size: 43px;
+    margin: 30px 0 20px;
+  }
+  .gate-date {
+    font-size: 8px;
+    letter-spacing: 2px;
+  }
+  .cinematic .gate-scroll {
+    bottom: 110px;
+    gap: 11px;
+  }
+  .gate-scroll > span:not(.scroll-track) {
+    font-size: 7px;
+    letter-spacing: 1.6px;
+  }
+  .gate-scroll small {
+    font-size: 17px;
+  }
+  .scroll-track {
+    height: 32px;
+  }
+  .mandap-foreground {
+    width: 110px;
+    bottom: -20px;
+  }
+  .foreground-left {
+    left: -35px;
+  }
+  .foreground-right {
+    right: -35px;
+  }
+  .motion-toggle {
+    bottom: 15px;
+    right: 15px;
+    font-size: 9px;
+    padding: 10px 12px;
+  }
+  .cinematic .mandap-doors {
+    perspective: 1000px;
+  }
+}
+@media (max-height: 680px) {
+  .mandap-names {
+    padding-top: 35px;
+    padding-bottom: 35px;
+  }
+  .mandap-names h2 {
+    font-size: 64px;
+  }
+  .mandap-names > .eyebrow {
+    margin-bottom: 16px;
+  }
+  .mandap-blessing {
+    margin-bottom: 12px;
+  }
+  .mandap-rule {
+    margin-top: 17px;
+    margin-bottom: 10px;
+  }
+  .mandap-enter {
+    margin-top: 15px;
+  }
+  .gate-title {
+    font-size: 40px;
+    margin-top: 24px;
+  }
+  .gate-overline {
+    margin-bottom: 22px;
+  }
+  .gate-seal {
+    width: 76px;
+    height: 76px;
+    font-size: 32px;
+    line-height: 76px;
+  }
+  .cinematic .gate-welcome {
+    padding-bottom: 100px;
+  }
+  .cinematic .gate-scroll {
+    bottom: 65px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cinematic .mandap-story {
+    height: auto;
+    min-height: 0;
+  }
+  .cinematic .mandap-stage {
+    position: relative;
+  }
+  .cinematic .mandap-doors,
+  .cinematic .gate-welcome,
+  .cinematic .gate-scroll,
+  .mandap-petals {
+    display: none;
+  }
+  .cinematic .mandap-names {
+    opacity: 1;
+    transform: none;
+  }
+  .cinematic .mandap-scenery {
+    transform: none;
+  }
+  .cinematic .story-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .mandap-door {
+    background-image: url("assets/mandap-door-mobile.svg");
+  }
+}
+@media (max-height: 560px) and (orientation: landscape) {
+  .mandap-stage {
+    min-height: 100svh;
+  }
+  .mandap-names {
+    padding: 20px 50px;
+  }
+  .mandap-names h2 {
+    font-size: clamp(38px, 7vw, 70px);
+    line-height: 1.1;
+  }
+  .mandap-names h2 span {
+    display: inline;
+    margin: 0 8px;
+  }
+  .mandap-blessing {
+    font-size: 13px;
+    margin-bottom: 9px;
+  }
+  .mandap-names > .eyebrow {
+    margin-bottom: 14px;
+  }
+  .mandap-rule {
+    margin: 10px 0;
+  }
+  .mandap-promise {
+    font-size: 20px;
+    margin-top: 7px;
+  }
+  .mandap-enter {
+    margin-top: 12px;
+  }
+  .gate-title {
+    font-size: 33px;
+    margin: 14px 0 10px;
+  }
+  .gate-title br {
+    display: none;
+  }
+  .gate-seal {
+    width: 58px;
+    height: 58px;
+    font-size: 27px;
+    line-height: 58px;
+  }
+  .gate-seal span {
+    font-size: 20px;
+  }
+  .gate-overline {
+    margin-bottom: 16px;
+  }
+  .cinematic .gate-welcome {
+    padding-bottom: 65px;
+  }
+  .cinematic .gate-scroll {
+    bottom: 22px;
+    gap: 6px;
+  }
+  .gate-scroll .scroll-track,
+  .gate-scroll small {
+    display: none;
+  }
+  .mandap-scene-count {
+    bottom: 73px;
+  }
+}

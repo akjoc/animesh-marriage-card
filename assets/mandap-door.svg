@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="1000" viewBox="0 0 600 1000" preserveAspectRatio="none" fill="none">
+<defs>
+<linearGradient id="wood" x1="0" y1="0" x2="600" y2="900" gradientUnits="userSpaceOnUse"><stop stop-color="#37121f"/><stop offset=".46" stop-color="#6c2437"/><stop offset="1" stop-color="#3a1020"/></linearGradient>
+<linearGradient id="gold" x1="0" x2="600" y2="1000" gradientUnits="userSpaceOnUse"><stop stop-color="#98703e"/><stop offset=".35" stop-color="#f3d99e"/><stop offset=".6" stop-color="#b48a4f"/><stop offset="1" stop-color="#ecd09a"/></linearGradient>
+<pattern id="jali" width="48" height="64" patternUnits="userSpaceOnUse"><path d="M24 4C24 20 4 20 4 32s20 12 20 28c0-16 20-16 20-28S24 20 24 4Z" stroke="#c1a067" stroke-opacity=".16"/><circle cx="24" cy="32" r="2" fill="#d2ab6b" fill-opacity=".27"/></pattern>
+<pattern id="edge" width="18" height="30" patternUnits="userSpaceOnUse"><path d="m9 3 5 12-5 12-5-12Z" stroke="#cba76a" stroke-opacity=".5" stroke-width=".8"/></pattern>
+<g id="floral"><path d="M0 30C-35 10-28-20 0-8c-12-28 18-35 24-10C48-39 65-15 41 5c30 10 16 36-10 25 0 29-29 31-31 0Z" stroke="url(#gold)"/><path d="M7 22Q-11 6 2 0M17 12Q10-10 21-9M26 17Q43-10 40 3M27 23Q48 18 42 25M15 26Q25 47 18 42" stroke="#c5a06a"/><circle cx="18" cy="21" r="5" fill="#bc965d"/></g>
+</defs>
+<path fill="url(#wood)" d="M0 0h600v1000H0z"/><path fill="url(#jali)" d="M0 0h600v1000H0z"/>
+<path stroke="url(#gold)" stroke-width="3" d="M18 14h564v972H18z"/><path stroke="#c9a466" stroke-opacity=".5" d="M26 22h548v956H26zM47 42h506v916H47z"/><path fill="url(#edge)" d="M29 25h16v950H29zM555 25h16v950h-16z"/>
+<path d="M72 914V283c0-69 41-100 78-101-4-63 45-82 88-74 2-40 39-58 62-82 23 24 60 42 62 82 43-8 92 11 88 74 37 1 78 32 78 101v631Z" fill="#421423" fill-opacity=".36" stroke="url(#gold)" stroke-width="2"/>
+<path d="M83 903V285c0-61 40-92 79-92-9-60 38-80 86-73 0-38 36-53 52-77 16 24 52 39 52 77 48-7 95 13 86 73 39 0 79 31 79 92v618Z" stroke="#b99055" stroke-opacity=".55"/>
+<path d="M102 880V309c0-57 39-80 76-80-8-63 32-83 78-74 0-32 28-45 44-63 16 18 44 31 44 63 46-9 86 11 78 74 37 0 76 23 76 80v571Z" fill="url(#jali)" stroke="#c7a16b" stroke-opacity=".5"/>
+<path d="M300 210v106m-9-91h18m-18 76h18M300 680v140" stroke="url(#gold)"/><path d="m300 319 12 20-12 20-12-20Zm0 320 12 20-12 20-12-20Z" stroke="url(#gold)"/>
+<g transform="translate(300 499)"><circle r="111" stroke="#bc965d" stroke-opacity=".4"/><circle r="100" stroke="url(#gold)"/><circle r="91" stroke="#bc965d" stroke-opacity=".4"/><path d="M0-83Q20-40 59-59 40-20 83 0 40 20 59 59 20 40 0 83-20 40-59 59-40 20-83 0-40-20-59-59-20-40 0-83Z" stroke="url(#gold)"/><circle r="52" stroke="url(#gold)"/><circle r="45" stroke="#bc965d" stroke-opacity=".5"/><path d="M0-38C-25-13-25 13 0 38c25-25 25-51 0-76ZM-38 0C-13 25 13 25 38 0 13-25-13-25-38 0Z" stroke="url(#gold)"/><circle r="11" fill="#caa86a" fill-opacity=".45"/></g>
+<use href="#floral" transform="translate(93 80) scale(.8)"/><use href="#floral" transform="translate(480 80) scale(.8)"/><use href="#floral" transform="translate(93 927) scale(.8)"/><use href="#floral" transform="translate(480 927) scale(.8)"/>
+<path d="M572 0h28v1000h-28" fill="#34101b" fill-opacity=".5"/><path d="M586 0v1000M594 0v1000" stroke="url(#gold)"/>
+<g fill="#d2af73" stroke="#80603a"><circle cx="576" cy="448" r="5"/><circle cx="576" cy="552" r="5"/><path d="M566 478h19v44h-19z"/><ellipse cx="575" cy="507" rx="12" ry="19" fill="none" stroke="#d2af73" stroke-width="4"/></g>
+</svg>
